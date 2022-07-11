@@ -66,6 +66,68 @@ class LinkedListOperations<T>
         node.next = temp.next;
         temp.next = node;
     }
+    void deleteAtBeg()
+    {
+        if(start == null)
+        {
+            System.out.println("Linked List is empty");
+            return;
+        }
+        if(start.next == null)
+        {
+            start = null;
+            return;
+        }
+        Node<T> temp = start;
+        start = start.next;
+        temp.next = null;
+        temp = null;
+    }
+    void deleteFromEnd()
+    {
+        if(start == null)
+        {
+            System.out.println("Linked List is empty");
+            return;
+        }
+        if(start.next == null)
+        {
+            start = null;
+            return;
+        }
+        Node<T> temp = start;
+        Node<T> temp2 = start;
+        while(temp != null)
+        {
+            temp2 = temp;
+            temp = temp.next;
+        }
+        temp2.next = null;
+        temp = null;
+    }
+    void deleteFromMiddle(int pos)
+    {
+        if(start == null)
+        {
+            System.out.println("Linked List is empty");
+            return;
+        }
+        if(start.next == null)
+        {
+            start = null;
+            return;
+        }
+        Node<T> temp = start;
+        Node<T> temp2 = start;
+        for(int i=1; i<pos-1; i++)
+        {
+            temp = temp.next;
+            temp2 = temp;
+        }
+        temp2 = temp2.next;
+        temp.next = temp.next.next;
+        temp2.next = null;
+    }
 }
 public class LinkedListCRUDOperations {
     public static void main(String[] args) {
@@ -76,6 +138,9 @@ public class LinkedListCRUDOperations {
                 System.out.println("2. Print the Linked List");
                 System.out.println("3. Add node at the beginning of linked list");
                 System.out.println("4. Add position wise in the linked list");
+                System.out.println("5. Delete the beginning node");
+                System.out.println("6. Delete the end node");
+                System.out.println("7. Delete from the given position");
                 System.out.println("10. Exit");
                 System.out.println("Enter the choice");
                 int choice = sc.nextInt();
@@ -99,6 +164,14 @@ public class LinkedListCRUDOperations {
                     int pos = sc.nextInt();
                     node = new Node<>(data);
                     opr.addAtMiddle(node, pos);
+                    break;
+                    case 5: opr.deleteAtBeg();
+                    break;
+                    case 6: opr.deleteFromEnd();
+                    break;
+                    case 7: System.out.println("Enter the position: ");
+                    int pos1 = sc.nextInt();
+                    opr.deleteFromMiddle(pos1);
                     break;
                     case 2: opr.print();
                     break;
